@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+	<title>Flashcard</title>
+</head>
+<header class="header">
+	<nav>
+		<a href='#' id="logo">Flashcard</a>
+		<ul class="navbar">
+			<li><a href="#">Home</a></li>
+			<li class="dropdown"><a href="#" class="dropbtn">Your
+					Library <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+				</a>
+				<div class="dropdown-content">
+					<a href="#" class="service-link">Collections</a> <a href="#" class="service-link">Flashcards</a> <a
+						href="#" class="service-link">Classes</a>
+				</div>
+			</li>
+			<li><a href="#">User</a></li>
+		</ul>
+	</nav>
+	<label for="nav_check" class="ahamburger">
+		<div></div>
+		<div></div>
+		<div></div>
+	</label>
+</header>
+
+<body>
+	<section id="flashcard-section">
+		<h2 class="title">Title</h2>
+		<div class="play-options">
+			<button>Game1</button>
+			<button>Game2</button>
+			<button>Game3</button>
+			<button>Game4</button>
+		</div>
+		<div class="flashcard">
+			<div class="flip-card">
+				<div class="flip-card-inner">
+					<div class="flip-card-front">
+						<h3>question</h3>
+						<div class="flashcard-buttons">
+							<button>
+								<span><img src="assets/images/edit-icon.png" alt="Edit">
+							</button>
+							<button>
+								<img src="assets/images/delete-icon.png" alt="Delete">
+							</button>
+							<button>
+								<img src="assets/images/star-icon.png" alt="Star">
+							</button>
+						</div>
+					</div>
+					<div class="flip-card-back">
+						<h3>answer</h3>
+						<div class="flashcard-buttons">
+							<button>
+								<img src="assets/images/edit-icon.png" alt="Edit">
+							</button>
+							<button>
+								<img src="assets/images/delete-icon.png" alt="Delete">
+							</button>
+							<button>
+								<img src="assets/images/star-icon.png" alt="Favorite">
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="control-buttons">
+			<span>
+				<button><img src="assets/images/play-icon.png" alt="Play"></button>
+				<button><img src="assets/images/shuffle-icon.png" alt="Shuffle"></button>
+			</span>
+			<span left-right-buttons>
+				<button id="left-button"><img src="assets/images/left-arrow-icon.png" alt="Left"></button>
+				<span class="number-of-cards">1/2</span>
+				<button id="right-button"><img src="assets/images/right-arrow-icon.png" alt="Right"></button>
+			</span>
+			<span>
+				<button><img src="assets/images/settings-icon.png" alt="Settings"></button>
+				<button><img src="assets/images/full-screen-icon.png" alt="Full screen"></button>
+			</span>
+		</div>
+		<div id="line">
+			<div id="progress"></div>
+		</div>
+	</section>
+	<script>
+		document.querySelectorAll('.flashcard').forEach(function (card) {
+			card.addEventListener('click', function () {
+				card.classList.toggle('flipped');
+			});
+		});
+		document.addEventListener("DOMContentLoaded", function () {
+			var line = document.getElementById("line");
+			var progress = document.getElementById("progress");
+			var leftButton = document.getElementById("left-button");
+			var rightButton = document.getElementById("right-button");
+
+			var currentProgress = 0;
+			var maxProgress = 6;
+
+			leftButton.addEventListener("click", decreaseProgress);
+			rightButton.addEventListener("click", increaseProgress);
+
+			function updateProgress() {
+				var percentage = (currentProgress / maxProgress) * 100;
+				progress.style.width = percentage + "%";
+			}
+
+			function decreaseProgress() {
+				if (currentProgress > 0) {
+					currentProgress--;
+					updateProgress();
+				}
+			}
+
+			function increaseProgress() {
+				if (currentProgress < maxProgress) {
+					currentProgress++;
+					updateProgress();
+				}
+			}
+
+			// Initialize the progress to its maximum value on page load
+			currentProgress = 0;
+			updateProgress();
+		});
+
+	</script>
+</body>
+
+</html>
